@@ -1,4 +1,4 @@
-def projectName = "app4triqs" /* set to app/repo name */
+def projectName = "mini_pole_interface" /* set to app/repo name */
 
 def dockerName = projectName.toLowerCase();
 /* which platform to build documentation on */

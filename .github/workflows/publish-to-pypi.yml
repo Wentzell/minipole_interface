@@ -30,8 +30,8 @@ jobs:
         mkdir build && cd build 
         cmake ../
         cp packaging/pypi/* ../
-        mv python/app4triqs/version.py ../python/app4triqs/version.py
-        rm ../python/app4triqs/version.py.in
+        mv python/mini_pole_interface/version.py ../python/mini_pole_interface/version.py
+        rm ../python/mini_pole_interface/version.py.in
     - name: Build a binary wheel and a source tarball
       run: python3 -m build
     - name: Store the distribution packages
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/app4triqs
+      url: https://pypi.org/p/mini_pole_interface
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 

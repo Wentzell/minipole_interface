@@ -2,7 +2,7 @@
 
 import unittest
 
-import app4triqs
+import mini_pole_interface
 from h5 import *
 from triqs.utility import mpi
 

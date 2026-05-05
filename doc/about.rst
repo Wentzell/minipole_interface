@@ -1,6 +1,6 @@
 .. _about:
 
-About app4triqs
+About mini_pole_interface
 ***************
 
 An example application using ``cpp2py`` and TRIQS.
