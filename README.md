@@ -1,77 +1,98 @@
 [![build](https://github.com/TRIQS/mini_pole_interface/workflows/build/badge.svg)](https://github.com/TRIQS/mini_pole_interface/actions?query=workflow%3Abuild)
 
-# mini_pole_interface - A skeleton for a TRIQS application
+# mini_pole_interface
 
-Initial Setup
--------------
+*TRIQS interface to the [MiniPole](https://github.com/Green-Phys/MiniPole)
+minimal-pole-method analytic continuation package.*
 
-To adapt this skeleton for a new TRIQS application, the following steps are necessary:
+`mini_pole_interface` lets you call MiniPole on TRIQS Green's-function
+containers — `Gf` / `BlockGf` on `MeshImFreq`, `MeshDLRImFreq`, `MeshDLRImTime`,
+or DLR coefficient meshes — and on user-supplied analytic real-frequency
+expressions, without writing the array-shuffling glue yourself. All four entry
+points return a `PoleResult` carrying the pole locations, weights, and
+ready-made evaluators (`evaluate(z)`, `to_gf_imfreq`, `to_gf_refreq`).
 
-* Create a repository, e.g. https://github.com/username/appname
+## Upstream and citation
 
-* Run the following commands in order after replacing **appname** accordingly
+The Minimal Pole Method (MPM) algorithm itself is **not** implemented here. It
+lives in the [Green-Phys/MiniPole](https://github.com/Green-Phys/MiniPole)
+package, which we pin to `mini_pole==0.7`. This repository is purely the TRIQS
+adapter layer.
 
-```bash
-git clone https://github.com/triqs/mini_pole_interface --branch python_only appname
-cd appname
-./share/squash_history.sh
-./share/replace_and_rename.py appname
-git add -A && git commit -m "Adjust mini_pole_interface skeleton for appname"
+If you use this interface, please cite the upstream papers:
+
+* L. Zhang and E. Gull, *Minimal pole representation and controlled analytic
+  continuation of matrix-valued correlation functions*,
+  [Phys. Rev. B **110**, 235131 (2024)](https://doi.org/10.1103/PhysRevB.110.235131)
+* L. Zhang, Y. Yu, and E. Gull, *Minimal pole representation and analytic
+  continuation of matrix-valued correlation functions*,
+  [Phys. Rev. B **110**, 035154 (2024)](https://doi.org/10.1103/PhysRevB.110.035154)
+* L. Zhang and E. Gull, *Minimal pole representation for spectral functions*,
+  [J. Chem. Phys. **162**, 214111 (2025)](https://doi.org/10.1063/5.0273073)
+
+A reference back to `triqs/mini_pole_interface` is appreciated when you also
+want to acknowledge the TRIQS-side wrapper.
+
+## Install
+
+This is a python-only TRIQS app. Two steps:
+
+1. **Install the upstream Python dependencies** into the same environment as
+   your TRIQS install:
+
+   ```bash
+   pip install mini_pole==0.7 kneed
+   ```
+
+   `kneed` is needed at runtime by `mini_pole`'s ESPRIT step but is not
+   currently declared in `mini_pole`'s `install_requires`, so we pull it in
+   defensively.
+
+2. **Build and install the wrapper** against your TRIQS installation:
+
+   ```bash
+   git clone https://github.com/TRIQS/mini_pole_interface mini_pole_interface.src
+   cmake -S mini_pole_interface.src -B build -GNinja
+   ninja -C build && ninja -C build install
+   ```
+
+   The major and minor version of `mini_pole_interface` must match your
+   installed TRIQS library.
+
+## Quickstart
+
+```python
+from triqs.gfs import Gf, MeshImFreq, MeshReFreq
+from mini_pole_interface import minipole_matsubara
+
+g = Gf(mesh=MeshImFreq(beta=10.0, statistic='Fermion', n_iw=200), target_shape=(1, 1))
+for iw in g.mesh:
+    g[iw] = 1.0 / (complex(iw) - 0.3)        # single pole at omega = 0.3
+
+res = minipole_matsubara(g, M=1)
+print(res.pole_location, res.pole_weight[0, 0, 0])
+
+g_re = res.to_gf_refreq(MeshReFreq(-2.0, 2.0, 401), eta=1e-3)
 ```
 
-You can now add your github repository and push to it
+For a full Matsubara → spectral-function example and a DLR-input variant, see
+the tutorial notebooks in the documentation.
 
-```bash
-git remote add origin https://github.com/username/appname
-git remote update
-git push origin unstable
-```
+## Entry points
 
-If you prefer to use the [SSH interface](https://help.github.com/en/articles/connecting-to-github-with-ssh)
-to the remote repository, replace the http link with e.g. `git@github.com:username/appname`.
+| Function | Input | Wraps | Use when … |
+| --- | --- | --- | --- |
+| `minipole_matsubara` | `Gf` / `BlockGf` on `MeshImFreq` | `mini_pole.MiniPole` | you have dense Matsubara samples |
+| `minipole_dlr` | `Gf` / `BlockGf` on `MeshDLR*` | `mini_pole.MiniPoleDLR` | you have a compact DLR representation |
+| `minipole_rf` | callable(s) `G_ij(z)` analytic in upper half-plane | `mini_pole.MiniPoleRf` | you have an analytic real-frequency expression |
+| `minipole_refine` | existing `(A_l, x_l)` or a `PoleResult` | `mini_pole.MiniPoleRfDPR` | you want to refine / compress an existing pole set |
 
-### Merging mini_pole_interface skeleton updates ###
+## Documentation
 
-You can merge future changes to the mini_pole_interface skeleton into your project with the following commands
+Full API reference and tutorials:
+[https://triqs.github.io/mini_pole_interface](https://triqs.github.io/mini_pole_interface)
 
-```bash
-git remote update
-git merge mini_pole_interface_remote/python_only -X ours -m "Merge latest mini_pole_interface skeleton changes"
-```
+## License
 
-If you should encounter any conflicts resolve them and `git commit`.
-Finally we repeat the replace and rename command from the initial setup.
-
-```bash
-./share/replace_and_rename.py appname
-git commit --amend
-```
-
-Now you can compare against the previous commit with: 
-```bash
-git diff prev_git_hash
-````
-
-Getting Started
----------------
-
-After setting up your application as described above you should customize the following files and directories
-according to your needs (replace mini_pole_interface in the following by the name of your application)
-
-* Adjust or remove the `README.md` and `doc/ChangeLog.md` file
-* In the `python/mini_pole_interface` subdirectory add your Python source files.
-* In the `test/python` subdirectory adjust the example test `Basic.py` or add your own tests.
-* Adjust any documentation examples given as `*.rst` files in the doc directory.
-* Adjust the sphinx configuration in `doc/conf.py.in` as necessary.
-* The build and install process is identical to the one outline [here](https://triqs.github.io/mini_pole_interface/unstable/install.html).
-
-### Optional ###
-----------------
-
-* Add your email address to the bottom section of `Jenkinsfile` for Jenkins CI notification emails
-```
-End of build log:
-\${BUILD_LOG,maxLines=60}
-    """,
-    to: 'user@domain.org',
-```
+`mini_pole_interface` is published under the GNU General Public License v3 —
+see [`LICENSE.txt`](LICENSE.txt).
