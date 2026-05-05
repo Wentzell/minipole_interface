@@ -1,8 +1,6 @@
 def projectName = "mini_pole_interface" /* set to app/repo name */
 
 def dockerName = projectName.toLowerCase();
-/* which platform to build documentation on */
-def documentationPlatform = "ubuntu-clang"
 /* depend on triqs upstream branch/project */
 def triqsBranch = env.CHANGE_TARGET ?: env.BRANCH_NAME
 def triqsProject = '/TRIQS/triqs/' + triqsBranch.replaceAll('/', '%2F')
@@ -40,9 +38,7 @@ for (int i = 0; i < dockerPlatforms.size(); i++) {
       archiveArtifacts(artifacts: "Dockerfile.${env.STAGE_NAME}")
       /* build and tag */
       def args = ''
-      if (platform == documentationPlatform)
-        args = '-DBuild_Documentation=1'
-      else if (platform == "sanitize")
+      if (platform == "sanitize")
         args = '-DASAN=ON -DUBSAN=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo'
       def img = docker.build("flatironjenkins/${dockerName}:${env.BRANCH_NAME}-${env.STAGE_NAME}", "--build-arg APPNAME=${projectName} --build-arg BUILD_ID=${env.BUILD_TAG} --build-arg CMAKE_ARGS='${args}' .")
       catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
@@ -120,26 +116,7 @@ try {
       def release = env.BRANCH_NAME == "master" || env.BRANCH_NAME == "unstable" || sh(returnStdout: true, script: "git describe --exact-match HEAD || true").trim()
       def workDir = pwd(tmp:true)
       lock('triqs_publish') {
-      /* Update documention on gh-pages branch */
-      dir("$workDir/gh-pages") {
-        def subdir = "${projectName}/${env.BRANCH_NAME}"
-        git(url: "ssh://git@github.com/TRIQS/TRIQS.github.io.git", branch: "master", credentialsId: "ssh", changelog: false)
-        sh "rm -rf ${subdir}"
-        docker.image("flatironjenkins/${dockerName}:${env.BRANCH_NAME}-${documentationPlatform}").inside() {
-          sh """#!/bin/bash -ex
-            base=\$INSTALL/share/doc
-            dir="${projectName}"
-            [[ -d \$base/triqs_\$dir ]] && dir=triqs_\$dir || [[ -d \$base/\$dir ]]
-            cp -rp \$base/\$dir ${subdir}
-          """
-        }
-        sh "git add -A ${subdir}"
-        sh """
-          git commit --author='Flatiron Jenkins <jenkins@flatironinstitute.org>' --allow-empty -m 'Generated documentation for ${subdir}' -m '${env.BUILD_TAG} ${commit}'
-        """
-        // note: credentials used above don't work (need JENKINS-28335)
-        sh "git push origin master"
-      }
+      /* Documentation is now published via .github/workflows/build_doc.yml. */
       /* Update packaging repo submodule */
       if (release) { dir("$workDir/packaging") { try {
         git(url: "ssh://git@github.com/TRIQS/packaging.git", branch: env.BRANCH_NAME, credentialsId: "ssh", changelog: false)
