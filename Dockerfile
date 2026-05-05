@@ -2,8 +2,8 @@
 FROM flatironinstitute/triqs:unstable-ubuntu-clang
 ARG APPNAME=mini_pole_interface
 
-# Install here missing dependencies, e.g.
-# RUN apt-get update && apt-get install -y python3-skimage
+# Install MiniPole + kneed (kneed is imported at module load by mini_pole but missing from upstream's install_requires)
+RUN pip install --no-cache-dir mini_pole==0.7 kneed
 
 COPY --chown=build . $SRC/$APPNAME
 WORKDIR $BUILD/$APPNAME

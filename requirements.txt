@@ -1,4 +1,6 @@
 # Required python packages for this application (these should also be added to Dockerfile for Jenkins)
+mini_pole==0.7
+kneed
 # For documentation builds we additionaly require
 #sphinx
 #numpydoc

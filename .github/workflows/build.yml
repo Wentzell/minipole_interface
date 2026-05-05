@@ -107,6 +107,10 @@ jobs:
         echo "CPPFLAGS=-I$(brew --prefix libomp)/include $CPPFLAGS" >> $GITHUB_ENV
         echo "LDFLAGS=-L$(brew --prefix libomp)/lib -L$(brew --prefix llvm)/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind" >> $GITHUB_ENV
 
+    - name: Install Python runtime dependencies (ubuntu)
+      if: ${{ contains(matrix.os, 'ubuntu') }}
+      run: pip install -r requirements.txt
+
     - name: Add clang CXXFLAGS
       if: ${{ matrix.cxx == 'clang++' }}
       run: |
