@@ -3,21 +3,36 @@
 Reporting issues
 ****************
 
-Please report all problems and bugs directly at the github issue page
-`<https://github.com/TRIQS/mini_pole_interface/issues>`_.  In order to make it easier for us
-to solve the issue please follow these guidelines:
+This package sits between two upstream codebases. To get a fast resolution,
+file your issue in the right tracker:
 
-#. In all cases specify which version of the application you are using. You can
-   find the version number in the file :file:`CMakeLists.txt` at the root of the
-   application sources.
+* **Bugs in the wrapper layer** (Gf ↔ ndarray conversion, ``PoleResult``
+  helpers, ``BlockGf`` dispatch, build/install on top of TRIQS, missing
+  CMake glue, documentation): file at
+  `<https://github.com/TRIQS/mini_pole_interface/issues>`_.
 
-#. If you have a problem during the installation, give us information about
-   your operating system and the compiler you are using. Include the outputs of
-   the ``cmake`` and ``make`` commands as well as the ``CMakeCache.txt`` file
-   which is in the build directory. Please include these outputs in a
-   `gist <http://gist.github.com/>`_ file referenced in the issue.
+* **Bugs in the MPM algorithm itself** (incorrect pole locations, ESPRIT /
+  conformal-map behavior, knee detection, upstream API changes, regressions
+  between ``mini_pole`` releases): file at
+  `<https://github.com/Green-Phys/MiniPole/issues>`_. We pin
+  ``mini_pole==0.7``, so please verify the behavior reproduces with that
+  exact version.
 
-#. If you are experiencing a problem during the execution of the application, provide
-   a script which allows to quickly reproduce the problem.
+* **TRIQS Green's-function or DLR issues** (mesh construction,
+  ``make_gf_dlr`` semantics, ``BlockGf`` API): file at
+  `<https://github.com/TRIQS/triqs/issues>`_.
+
+When in doubt, open it here and we will redirect.
+
+In all cases please include:
+
+#. The version of ``mini_pole_interface``, ``mini_pole``, and TRIQS you are
+   using (``triqs --version``, ``pip show mini_pole``, the git SHA of this
+   repository).
+#. For build problems: your operating system and compiler, the output of
+   ``cmake`` and ``ninja``, and the ``CMakeCache.txt`` from the build
+   directory. Attach as a `gist <https://gist.github.com/>`_.
+#. For runtime problems: a self-contained script that reproduces the issue
+   on a small example.
 
 Thanks!
