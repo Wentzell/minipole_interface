@@ -37,13 +37,10 @@ for (int i = 0; i < dockerPlatforms.size(); i++) {
       """
       archiveArtifacts(artifacts: "Dockerfile.${env.STAGE_NAME}")
       /* build and tag */
-      def args = ''
-      if (platform == "sanitize")
-        args = '-DASAN=ON -DUBSAN=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo'
-      def img = docker.build("flatironjenkins/${dockerName}:${env.BRANCH_NAME}-${env.STAGE_NAME}", "--build-arg APPNAME=${projectName} --build-arg BUILD_ID=${env.BUILD_TAG} --build-arg CMAKE_ARGS='${args}' .")
+      def img = docker.build("flatironjenkins/${dockerName}:${env.BRANCH_NAME}-${env.STAGE_NAME}", "--build-arg APPNAME=${projectName} --build-arg BUILD_ID=${env.BUILD_TAG} .")
       catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
         img.inside("--shm-size=4gb") {
-          sh "make -C \$BUILD/${projectName} test CTEST_OUTPUT_ON_FAILURE=1"
+          sh "cd \$SRC/${projectName} && pytest test/python -v"
         }
       }
       if (!keepInstall) {
@@ -64,42 +61,28 @@ for (int i = 0; i < osxPlatforms.size(); i++) {
   platforms["osx-$platform"] = { -> node('osx && triqs') {
     stage("osx-$platform") { timeout(time: 1, unit: 'HOURS') { ansiColor('xterm') {
       def srcDir = pwd()
-      def tmpDir = pwd(tmp:true)
-      def buildDir = "$tmpDir/build"
-      /* install real branches in a fixed predictable place so apps can find them */
-      def installDir = keepInstall ? "${env.HOME}/install/${projectName}/${env.BRANCH_NAME}/${platform}" : "$tmpDir/install"
       def triqsDir = "${env.HOME}/install/triqs/${triqsBranch}/${platform}"
       def venv = triqsDir
-      dir(installDir) {
-        deleteDir()
-      }
 
       checkout scm
 
       def hdf5 = "${env.BREW}/opt/hdf5"
-      dir(buildDir) { withEnv(platformEnv[1].collect { it.replace('\$BREW', env.BREW) } + [
+      dir(srcDir) { withEnv(platformEnv[1].collect { it.replace('\$BREW', env.BREW) } + [
           "PATH=$venv/bin:${env.BREW}/bin:/usr/bin:/bin:/usr/sbin",
           "HDF5_ROOT=$hdf5",
           "C_INCLUDE_PATH=$hdf5/include:${env.BREW}/include",
           "CPLUS_INCLUDE_PATH=$venv/include:$hdf5/include:${env.BREW}/include",
           "LIBRARY_PATH=$venv/lib:$hdf5/lib:${env.BREW}/lib",
           "DYLD_LIBRARY_PATH=$venv/lib:$hdf5/lib:${env.BREW}/lib",
-          "PYTHONPATH=$installDir/lib/python3.13/site-packages",
+          "PYTHONPATH=$venv/lib/python3.13/site-packages",
           "CMAKE_PREFIX_PATH=$venv/lib/cmake/triqs",
           "VIRTUAL_ENV=$venv",
           "OMP_NUM_THREADS=2"]) {
-        deleteDir()
-        /* note: this is installing into the parent (triqs) venv (install dir), which is thus shared among apps and so not be completely safe */
-        sh "pip3 install -U -r $srcDir/requirements.txt"
-        sh "cmake $srcDir -DCMAKE_INSTALL_PREFIX=$installDir -DTRIQS_ROOT=$triqsDir"
-        sh "make -j2 || make -j1 VERBOSE=1"
-        catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') { try {
-          sh "make test CTEST_OUTPUT_ON_FAILURE=1"
-        } catch (exc) {
-          archiveArtifacts(artifacts: 'Testing/Temporary/LastTest.log')
-          throw exc
-        } }
-        sh "make install"
+        /* note: this is installing into the parent (triqs) venv, which is thus shared among apps and so not be completely safe */
+        sh "pip3 install -U -e \".[test]\""
+        catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+          sh "pytest test/python -v"
+        }
       } }
     } } }
   } }

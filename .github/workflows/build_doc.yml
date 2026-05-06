@@ -8,17 +8,6 @@ on:
 permissions:
   contents: write
 
-env:
-  CMAKE_C_COMPILER_LAUNCHER: ccache
-  CMAKE_CXX_COMPILER_LAUNCHER: ccache
-  CCACHE_COMPILERCHECK: content
-  CCACHE_BASEDIR: ${{ github.workspace }}
-  CCACHE_DIR: ${{ github.workspace }}/.ccache
-  CCACHE_MAXSIZE: 500M
-  CCACHE_SLOPPINESS: pch_defines,time_macros,include_file_mtime,include_file_ctime
-  CCACHE_COMPRESS: "1"
-  CCACHE_COMPRESSLEVEL: "1"
-
 jobs:
   build_doc:
     runs-on: ubuntu-24.04
@@ -26,68 +15,38 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: actions/cache/restore@v4
-      with:
-        path: ${{ env.CCACHE_DIR }}
-        key: ccache-doc-${{ github.run_id }}-${{ github.run_attempt }}
-        restore-keys: |
-          ccache-doc-
-
-    - name: Set cxx variables
-      run: echo "CXX=clang++" >> $GITHUB_ENV
-
     - name: Install ubuntu dependencies
       run: >
         sudo apt-get update &&
-        sudo apt-get install lsb-release wget software-properties-common &&
         sudo apt-get install
-        ccache
         cmake
         ninja-build
-        clang
-        clang-tools
+        g++
         gfortran
         hdf5-tools
         libboost-dev
-        libclang-dev
-        libc++-dev
-        libc++abi-dev
         libomp-dev
         libfftw3-dev
-        libgfortran5
         libgmp-dev
         libhdf5-dev
         libopenblas-dev
         libopenmpi-dev
         openmpi-bin
         openmpi-common
-        openmpi-doc
-        python3-clang
         python3-dev
         python3-mako
-        python3-matplotlib
         python3-mpi4py
         python3-numpy
         python3-pip
         python3-scipy
-        python3-ipython
         pandoc
 
     - name: Set up virtualenv
       run: |
-        mkdir -p $HOME/.venv
         python3 -m venv --system-site-packages $HOME/.venv/my_python
         source $HOME/.venv/my_python/bin/activate
         echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
         echo "PATH=$PATH" >> $GITHUB_ENV
-
-    - name: Install runtime and documentation Python dependencies
-      run: |
-        pip install mini_pole==0.7 kneed
-        pip install sphinx numpydoc nbsphinx sphinx_rtd_theme myst_parser linkify-it-py jupyter
-
-    - name: Add clang CXXFLAGS
-      run: echo "CXXFLAGS=-stdlib=libc++" >> $GITHUB_ENV
 
     - name: Build & Install TRIQS
       run: |
@@ -95,11 +54,15 @@ jobs:
         cmake -S triqs -B triqs/build -G Ninja -DBuild_Tests=OFF -DUpdate_Python_Bindings=OFF -DCMAKE_INSTALL_PREFIX=$HOME/install
         cmake --build triqs/build --target install --verbose
 
+    - name: Install minipole_interface and docs dependencies
+      run: |
+        source $HOME/install/share/triqs/triqsvars.sh
+        pip install -e ".[docs]"
+
     - name: Build minipole_interface documentation
       run: |
         source $HOME/install/share/triqs/triqsvars.sh
-        cmake -S . -B build -G Ninja -DBuild_Documentation=ON
-        cmake --build build --verbose
+        sphinx-build -j auto -b html doc build/doc/html
 
     - name: Deploy to gh-pages
       if: github.ref_name == 'unstable'
@@ -108,13 +71,3 @@ jobs:
         branch: gh-pages
         folder: build/doc/html/
         single-commit: true
-
-    - name: ccache statistics
-      if: always()
-      run: ccache -sv
-
-    - uses: actions/cache/save@v4
-      if: always()
-      with:
-        path: ${{ env.CCACHE_DIR }}
-        key: ccache-doc-${{ github.run_id }}-${{ github.run_attempt }}

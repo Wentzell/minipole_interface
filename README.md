@@ -35,29 +35,30 @@ want to acknowledge the TRIQS-side wrapper.
 
 ## Install
 
-This is a python-only TRIQS app. Two steps:
+This is a python-only TRIQS app. Install into the same environment as your
+TRIQS install. Two paths are supported; pick whichever fits your workflow:
 
-1. **Install the upstream Python dependencies** into the same environment as
-   your TRIQS install:
+**Recommended — pip:**
 
-   ```bash
-   pip install mini_pole==0.7 kneed
-   ```
+```bash
+git clone https://github.com/TRIQS/minipole_interface
+pip install -e ./minipole_interface
+```
 
-   `kneed` is needed at runtime by `mini_pole`'s ESPRIT step but is not
-   currently declared in `mini_pole`'s `install_requires`, so we pull it in
-   defensively.
+Drop `-e` for a non-editable install. `pip` pulls in `mini_pole==0.7` and
+`kneed` automatically.
 
-2. **Build and install the wrapper** against your TRIQS installation:
+**CMake (equal path; needed if you want the lmod modulefile, the `vars.sh`
+shell script, or the `find_package(minipole_interface)` config files):**
 
-   ```bash
-   git clone https://github.com/TRIQS/minipole_interface minipole_interface.src
-   cmake -S minipole_interface.src -B build -GNinja
-   ninja -C build && ninja -C build install
-   ```
+```bash
+git clone https://github.com/TRIQS/minipole_interface minipole_interface.src
+cmake -S minipole_interface.src -B build -GNinja
+ninja -C build && ninja -C build install
+```
 
-   The major and minor version of `minipole_interface` must match your
-   installed TRIQS library.
+The CMake path enforces that the major and minor version of
+`minipole_interface` match your installed TRIQS library.
 
 ## Quickstart
 

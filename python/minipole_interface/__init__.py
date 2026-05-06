@@ -30,6 +30,12 @@ All four return a :class:`PoleResult` (or a ``dict[block_name, PoleResult]`` for
 ``evaluate`` / ``to_gf_imfreq`` / ``to_gf_refreq`` helpers.
 """
 
+try:
+    from ._version import __version__
+except ImportError:
+    from importlib.metadata import version as _v
+    __version__ = _v(__name__)
+
 from ._convert import PoleResult
 from .dlr import fit_poles_dlr
 from .matsubara import fit_poles_matsubara
@@ -42,4 +48,5 @@ __all__ = [
     "fit_poles_dlr",
     "fit_poles_rf",
     "refine_poles",
+    "__version__",
 ]
