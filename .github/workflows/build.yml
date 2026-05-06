@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Install ubuntu dependencies
       if: ${{ contains(matrix.os, 'ubuntu') }}
@@ -40,7 +40,6 @@ jobs:
         openmpi-bin
         openmpi-common
         python3-dev
-        python3-mako
         python3-mpi4py
         python3-numpy
         python3-pip
@@ -50,14 +49,14 @@ jobs:
       if: ${{ contains(matrix.os, 'macos') }}
       run: |
         brew update
-        brew install gcc llvm libomp boost fftw hdf5 open-mpi openblas
+        brew install gcc llvm libomp boost fftw hdf5 open-mpi openblas mpi4py numpy scipy
 
-    - name: Set up virtualenv
+    - name: Set up Python venv
       run: |
+        # --system-site-packages exposes apt- (Linux) / brew- (macOS) installed mpi4py/numpy/scipy
         python3 -m venv --system-site-packages $HOME/.venv/my_python
-        source $HOME/.venv/my_python/bin/activate
-        echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
-        echo "PATH=$PATH" >> $GITHUB_ENV
+        echo "VIRTUAL_ENV=$HOME/.venv/my_python" >> $GITHUB_ENV
+        echo "$HOME/.venv/my_python/bin"         >> $GITHUB_PATH
 
     - name: Build & Install TRIQS
       env:
@@ -65,7 +64,10 @@ jobs:
       run: |
         git ls-remote --exit-code --heads https://github.com/TRIQS/triqs "$TRIQS_BRANCH" > /dev/null 2>&1 || TRIQS_BRANCH=unstable
         git clone https://github.com/TRIQS/triqs --branch "$TRIQS_BRANCH"
-        cmake -S triqs -B triqs/build -G Ninja -DBuild_Tests=OFF -DUpdate_Python_Bindings=OFF -DCMAKE_INSTALL_PREFIX=$HOME/install
+        cmake -S triqs -B triqs/build -G Ninja \
+          -DPython_EXECUTABLE=$VIRTUAL_ENV/bin/python \
+          -DBuild_Tests=OFF -DUpdate_Python_Bindings=OFF \
+          -DCMAKE_INSTALL_PREFIX=$HOME/install
         cmake --build triqs/build --target install --verbose
 
     - name: Install minipole_interface
