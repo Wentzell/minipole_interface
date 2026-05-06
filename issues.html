@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reporting issues &mdash; minipole_interface  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=f7f783a0" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+
+  
+    <link rel="shortcut icon" href="_static/triqs_favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="ChangeLog.html" />
+    <link rel="prev" title="About minipole_interface" href="about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #7E588A" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            minipole_interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install minipole_interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install-from-source-via-pip-recommended">Install from source via pip (recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install-from-source-via-cmake">Install from source via CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#version-compatibility">Version compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#custom-cmake-options">Custom CMake options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/matsubara_to_spectral.html">Matsubara → spectral function: Bethe lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/matsubara_to_spectral.html#Set-up-the-reference-Green's-function">Set up the reference Green’s function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/matsubara_to_spectral.html#Run-MPM">Run MPM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/matsubara_to_spectral.html#Plots">Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/matsubara_to_spectral.html#Sanity-check">Sanity check</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/dlr_continuation.html">DLR-input continuation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/dlr_continuation.html#Bethe-lattice-on-a-DLR-Matsubara-mesh">Bethe lattice on a DLR Matsubara mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/dlr_continuation.html#How-the-basis-bridge-works">How the basis bridge works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/dlr_continuation.html#Run-MPM-and-reconstruct-the-spectrum">Run MPM and reconstruct the spectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/dlr_continuation.html#Plots">Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/dlr_continuation.html#Sanity-check">Sanity check</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#full-module-reference">Full module reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About minipole_interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#citing">Citing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reporting issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChangeLog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ChangeLog.html#version-3-1-0">Version 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ChangeLog.html#version-3-0-0">Version 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ChangeLog.html#version-2-2-0">Version 2.2.0</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #7E588A" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">minipole_interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reporting issues</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/issues.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reporting-issues">
+<span id="issues"></span><h1>Reporting issues<a class="headerlink" href="#reporting-issues" title="Link to this heading"></a></h1>
+<p>This package sits between two upstream codebases. To get a fast resolution,
+file your issue in the right tracker:</p>
+<ul class="simple">
+<li><p><strong>Bugs in the wrapper layer</strong> (Gf ↔ ndarray conversion, <code class="docutils literal notranslate"><span class="pre">PoleResult</span></code>
+helpers, <code class="docutils literal notranslate"><span class="pre">BlockGf</span></code> dispatch, build/install on top of TRIQS, missing
+CMake glue, documentation): file at
+<a class="reference external" href="https://github.com/TRIQS/minipole_interface/issues" rel="noopener noreferrer" target="_blank">https://github.com/TRIQS/minipole_interface/issues</a>.</p></li>
+<li><p><strong>Bugs in the MPM algorithm itself</strong> (incorrect pole locations, ESPRIT /
+conformal-map behavior, knee detection, upstream API changes, regressions
+between <code class="docutils literal notranslate"><span class="pre">mini_pole</span></code> releases): file at
+<a class="reference external" href="https://github.com/Green-Phys/MiniPole/issues" rel="noopener noreferrer" target="_blank">https://github.com/Green-Phys/MiniPole/issues</a>. We pin
+<code class="docutils literal notranslate"><span class="pre">mini_pole==0.7</span></code>, so please verify the behavior reproduces with that
+exact version.</p></li>
+<li><p><strong>TRIQS Green’s-function or DLR issues</strong> (mesh construction,
+<code class="docutils literal notranslate"><span class="pre">make_gf_dlr</span></code> semantics, <code class="docutils literal notranslate"><span class="pre">BlockGf</span></code> API): file at
+<a class="reference external" href="https://github.com/TRIQS/triqs/issues" rel="noopener noreferrer" target="_blank">https://github.com/TRIQS/triqs/issues</a>.</p></li>
+</ul>
+<p>When in doubt, open it here and we will redirect.</p>
+<p>In all cases please include:</p>
+<ol class="arabic simple">
+<li><p>The version of <code class="docutils literal notranslate"><span class="pre">minipole_interface</span></code>, <code class="docutils literal notranslate"><span class="pre">mini_pole</span></code>, and TRIQS you are
+using (<code class="docutils literal notranslate"><span class="pre">triqs</span> <span class="pre">--version</span></code>, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">show</span> <span class="pre">mini_pole</span></code>, the git SHA of this
+repository).</p></li>
+<li><p>For build problems: your operating system and compiler, the output of
+<code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">ninja</span></code>, and the <code class="docutils literal notranslate"><span class="pre">CMakeCache.txt</span></code> from the build
+directory. Attach as a <a class="reference external" href="https://gist.github.com/" rel="noopener noreferrer" target="_blank">gist</a>.</p></li>
+<li><p>For runtime problems: a self-contained script that reproduces the issue
+on a small example.</p></li>
+</ol>
+<p>Thanks!</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about.html" class="btn btn-neutral float-left" title="About minipole_interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ChangeLog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018-2021 The Simons Foundation, authors: A. Hampel, O. Parcollet, D. Simons, H. Strand, N. Wentzell.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
