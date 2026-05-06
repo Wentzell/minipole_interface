@@ -1,21 +1,21 @@
 .. _welcome:
 
-mini_pole_interface
+minipole_interface
 *******************
 
-.. sidebar:: mini_pole_interface |PROJECT_VERSION|
+.. sidebar:: minipole_interface |PROJECT_VERSION|
 
-   This is the homepage of mini_pole_interface |PROJECT_VERSION|.
+   This is the homepage of minipole_interface |PROJECT_VERSION|.
    For changes see the :ref:`changelog page <changelog>`.
 
       .. image:: _static/logo_github.png
          :width: 75%
          :align: center
-         :target: https://github.com/triqs/mini_pole_interface
+         :target: https://github.com/triqs/minipole_interface
 
 A TRIQS-side wrapper for the
 `MiniPole <https://github.com/Green-Phys/MiniPole>`_ minimal-pole-method (MPM)
-analytic continuation package. ``mini_pole_interface`` lets you call MiniPole
+analytic continuation package. ``minipole_interface`` lets you call MiniPole
 on TRIQS Green's-function containers — ``Gf`` / ``BlockGf`` on ``MeshImFreq``,
 ``MeshDLRImFreq``, ``MeshDLRImTime`` — as well as on analytic real-frequency
 expressions, returning a :class:`PoleResult` carrying pole locations, weights,

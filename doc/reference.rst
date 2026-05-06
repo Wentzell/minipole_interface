@@ -3,7 +3,7 @@
 API reference
 *************
 
-.. currentmodule:: mini_pole_interface
+.. currentmodule:: minipole_interface
 
 The package exposes four entry-point functions plus the :class:`PoleResult`
 dataclass returned by all of them.
@@ -25,4 +25,4 @@ Full module reference
    :template: autosummary_module_template.rst
    :recursive:
 
-   mini_pole_interface
+   minipole_interface

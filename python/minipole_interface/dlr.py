@@ -1,6 +1,6 @@
 ################################################################################
 #
-# mini_pole_interface: TRIQS interface to the MiniPole analytic continuation package
+# minipole_interface: TRIQS interface to the MiniPole analytic continuation package
 #
 # Copyright (C) 2026, The Simons Foundation
 #   author: N. Wentzell
@@ -18,7 +18,7 @@ Wraps :class:`mini_pole.MiniPoleDLR` for TRIQS Green's-function containers
 carrying a DLR mesh (``MeshDLR``, ``MeshDLRImFreq``, or ``MeshDLRImTime``).
 The single public function :func:`minipole_dlr` extracts cppdlr's pole
 representation directly and hands ``(A_l, x_l, beta)`` to upstream — see
-:func:`mini_pole_interface._convert._dlr_to_pole_repr` for the
+:func:`minipole_interface._convert._dlr_to_pole_repr` for the
 dimensionless-rf-nodes-divided-by-beta basis bridge.
 """
 

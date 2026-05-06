@@ -1,20 +1,20 @@
 # ##############################################################################
 #
-# mini_pole_interface - An example application using triqs and cpp2py
+# minipole_interface - An example application using triqs and cpp2py
 #
 # Copyright (C) ...
 #
-# mini_pole_interface is free software: you can redistribute it and/or modify it under the
+# minipole_interface is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 3 of the License, or (at your option) any later
 # version.
 #
-# mini_pole_interface is distributed in the hope that it will be useful, but WITHOUT ANY
+# minipole_interface is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# mini_pole_interface (in the file COPYING.txt in this directory). If not, see
+# minipole_interface (in the file COPYING.txt in this directory). If not, see
 # <http://www.gnu.org/licenses/>.
 #
 # ##############################################################################
@@ -24,7 +24,7 @@ cmake_policy(VERSION ${CMAKE_VERSION})
 
 # ############
 # Define Project
-project(mini_pole_interface VERSION 3.3.0 LANGUAGES CXX)
+project(minipole_interface VERSION 3.3.0 LANGUAGES CXX)
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
 # ############

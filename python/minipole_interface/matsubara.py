@@ -1,6 +1,6 @@
 ################################################################################
 #
-# mini_pole_interface: TRIQS interface to the MiniPole analytic continuation package
+# minipole_interface: TRIQS interface to the MiniPole analytic continuation package
 #
 # Copyright (C) 2026, The Simons Foundation
 #   author: N. Wentzell
@@ -19,7 +19,7 @@ single public function :func:`minipole_matsubara` accepts a ``Gf`` on
 ``MeshImFreq`` (matrix- or scalar-valued) or a ``BlockGf`` whose blocks live
 on ``MeshImFreq``, slices the fermionic mesh to its non-negative half (which
 upstream's contour-integral construction requires), and returns a
-:class:`~mini_pole_interface.PoleResult` (or a ``dict[str, PoleResult]``
+:class:`~minipole_interface.PoleResult` (or a ``dict[str, PoleResult]``
 keyed by block name).
 """
 

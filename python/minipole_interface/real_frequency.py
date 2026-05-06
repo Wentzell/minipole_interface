@@ -1,6 +1,6 @@
 ################################################################################
 #
-# mini_pole_interface: TRIQS interface to the MiniPole analytic continuation package
+# minipole_interface: TRIQS interface to the MiniPole analytic continuation package
 #
 # Copyright (C) 2026, The Simons Foundation
 #   author: N. Wentzell

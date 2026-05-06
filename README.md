@@ -1,11 +1,11 @@
-[![build](https://github.com/TRIQS/mini_pole_interface/workflows/build/badge.svg)](https://github.com/TRIQS/mini_pole_interface/actions?query=workflow%3Abuild)
+[![build](https://github.com/TRIQS/minipole_interface/workflows/build/badge.svg)](https://github.com/TRIQS/minipole_interface/actions?query=workflow%3Abuild)
 
-# mini_pole_interface
+# minipole_interface
 
 *TRIQS interface to the [MiniPole](https://github.com/Green-Phys/MiniPole)
 minimal-pole-method analytic continuation package.*
 
-`mini_pole_interface` lets you call MiniPole on TRIQS Green's-function
+`minipole_interface` lets you call MiniPole on TRIQS Green's-function
 containers — `Gf` / `BlockGf` on `MeshImFreq`, `MeshDLRImFreq`, `MeshDLRImTime`,
 or DLR coefficient meshes — and on user-supplied analytic real-frequency
 expressions, without writing the array-shuffling glue yourself. All four entry
@@ -30,7 +30,7 @@ If you use this interface, please cite the upstream papers:
 * L. Zhang and E. Gull, *Minimal pole representation for spectral functions*,
   [J. Chem. Phys. **162**, 214111 (2025)](https://doi.org/10.1063/5.0273073)
 
-A reference back to `triqs/mini_pole_interface` is appreciated when you also
+A reference back to `triqs/minipole_interface` is appreciated when you also
 want to acknowledge the TRIQS-side wrapper.
 
 ## Install
@@ -51,19 +51,19 @@ This is a python-only TRIQS app. Two steps:
 2. **Build and install the wrapper** against your TRIQS installation:
 
    ```bash
-   git clone https://github.com/TRIQS/mini_pole_interface mini_pole_interface.src
-   cmake -S mini_pole_interface.src -B build -GNinja
+   git clone https://github.com/TRIQS/minipole_interface minipole_interface.src
+   cmake -S minipole_interface.src -B build -GNinja
    ninja -C build && ninja -C build install
    ```
 
-   The major and minor version of `mini_pole_interface` must match your
+   The major and minor version of `minipole_interface` must match your
    installed TRIQS library.
 
 ## Quickstart
 
 ```python
 from triqs.gfs import Gf, MeshImFreq, MeshReFreq
-from mini_pole_interface import minipole_matsubara
+from minipole_interface import minipole_matsubara
 
 g = Gf(mesh=MeshImFreq(beta=10.0, statistic='Fermion', n_iw=200), target_shape=(1, 1))
 for iw in g.mesh:
@@ -90,9 +90,9 @@ the tutorial notebooks in the documentation.
 ## Documentation
 
 Full API reference and tutorials:
-[https://triqs.github.io/mini_pole_interface](https://triqs.github.io/mini_pole_interface)
+[https://triqs.github.io/minipole_interface](https://triqs.github.io/minipole_interface)
 
 ## License
 
-`mini_pole_interface` is published under the GNU General Public License v3 —
+`minipole_interface` is published under the GNU General Public License v3 —
 see [`LICENSE.txt`](LICENSE.txt).

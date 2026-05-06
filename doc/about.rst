@@ -1,9 +1,9 @@
 .. _about:
 
-About mini_pole_interface
+About minipole_interface
 *************************
 
-``mini_pole_interface`` is a TRIQS-side wrapper around the
+``minipole_interface`` is a TRIQS-side wrapper around the
 `Green-Phys/MiniPole <https://github.com/Green-Phys/MiniPole>`_ analytic
 continuation package. The Minimal Pole Method (MPM) algorithm — the
 matrix-valued ESPRIT step, the conformal maps, and the DLR / real-frequency
@@ -64,11 +64,11 @@ When using this package, please cite the upstream MPM publications:
       doi = {10.1063/5.0273073}
     }
 
-A reference to ``triqs/mini_pole_interface`` is appreciated when you also wish
+A reference to ``triqs/minipole_interface`` is appreciated when you also wish
 to acknowledge the TRIQS-side wrapper.
 
 License
 =======
 
-``mini_pole_interface`` is published under the GNU General Public License v3
+``minipole_interface`` is published under the GNU General Public License v3
 (see ``LICENSE.txt``), in line with TRIQS conventions.

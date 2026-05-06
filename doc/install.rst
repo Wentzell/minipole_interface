@@ -2,16 +2,16 @@
 
 .. _install:
 
-Install mini_pole_interface
+Install minipole_interface
 ***************************
 
-``mini_pole_interface`` is a python-only TRIQS application. Two installs are
+``minipole_interface`` is a python-only TRIQS application. Two installs are
 required: the upstream MiniPole Python package (and its missing dependency
 ``kneed``), and this wrapper, which builds against your TRIQS installation.
 
 .. note:: To guarantee reproducibility in scientific calculations we strongly
    recommend the use of a stable
-   `release <https://github.com/TRIQS/mini_pole_interface/releases>`_ of both
+   `release <https://github.com/TRIQS/minipole_interface/releases>`_ of both
    TRIQS and its applications.
 
 Prerequisites
@@ -40,12 +40,12 @@ TRIQS install:
 The exact pin of ``mini_pole==0.7`` matches what this version of the wrapper
 was tested against; bumping it requires a coordinated wrapper release.
 
-Compiling mini_pole_interface from source
+Compiling minipole_interface from source
 =========================================
 
 #. Download the source code from GitHub::
 
-     $ git clone https://github.com/TRIQS/mini_pole_interface mini_pole_interface.src
+     $ git clone https://github.com/TRIQS/minipole_interface minipole_interface.src
 
 #. Source the TRIQS environment so ``find_package(TRIQS)`` resolves::
 
@@ -53,10 +53,10 @@ Compiling mini_pole_interface from source
 
 #. Configure, build, and install::
 
-     $ cmake -S mini_pole_interface.src -B mini_pole_interface.build -GNinja
-     $ ninja -C mini_pole_interface.build
-     $ ninja -C mini_pole_interface.build test
-     $ ninja -C mini_pole_interface.build install
+     $ cmake -S minipole_interface.src -B minipole_interface.build -GNinja
+     $ ninja -C minipole_interface.build
+     $ ninja -C minipole_interface.build test
+     $ ninja -C minipole_interface.build install
 
    The default install prefix is ``$TRIQS_ROOT``; override with
    ``-DCMAKE_INSTALL_PREFIX=...``.
@@ -64,16 +64,16 @@ Compiling mini_pole_interface from source
 Version compatibility
 =====================
 
-The major and minor version of ``mini_pole_interface`` must match your
+The major and minor version of ``minipole_interface`` must match your
 installed TRIQS library; see the :ref:`TRIQS website <triqslibs:versions>`.
 Until a stable release is tagged, we recommend tracking the ``unstable``
 branch::
 
-    $ cd mini_pole_interface.src && git checkout unstable
+    $ cd minipole_interface.src && git checkout unstable
 
 Once a release is published, you can pin to a specific tag::
 
-    $ cd mini_pole_interface.src && git tag         # list available tags
+    $ cd minipole_interface.src && git tag         # list available tags
     $ git checkout <tag>                            # check out a specific version
 
 and follow the build steps above.
@@ -81,15 +81,15 @@ and follow the build steps above.
 Custom CMake options
 ====================
 
-The compilation of ``mini_pole_interface`` can be configured using
+The compilation of ``minipole_interface`` can be configured using
 CMake-options::
 
-    cmake -S mini_pole_interface.src -B build -DOPTION1=value1 -DOPTION2=value2 ...
+    cmake -S minipole_interface.src -B build -DOPTION1=value1 -DOPTION2=value2 ...
 
 +-----------------------------------------------------------------+----------------------------------------------------------+
 | Option                                                          | Syntax                                                   |
 +=================================================================+==========================================================+
-| Specify an installation path other than ``$TRIQS_ROOT``         | ``-DCMAKE_INSTALL_PREFIX=path_to_mini_pole_interface``   |
+| Specify an installation path other than ``$TRIQS_ROOT``         | ``-DCMAKE_INSTALL_PREFIX=path_to_minipole_interface``   |
 +-----------------------------------------------------------------+----------------------------------------------------------+
 | Disable testing (not recommended)                               | ``-DBuild_Tests=OFF``                                    |
 +-----------------------------------------------------------------+----------------------------------------------------------+

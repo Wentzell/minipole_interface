@@ -1,21 +1,21 @@
 easyblock = 'CMakeMake'
 
-name = 'TRIQS-mini_pole_interface'
+name = 'TRIQS-minipole_interface'
 version = '@PROJECT_VERSION@'
 
-homepage = 'https://triqs.github.io/mini_pole_interface/'
+homepage = 'https://triqs.github.io/minipole_interface/'
 description = """
  PROVIDE HERE A DESCRIPTION OF YOUR APPLICATION
 """
 
-docurls = ['https://triqs.github.io/mini_pole_interface/%(version_major_minor)s.x/']
+docurls = ['https://triqs.github.io/minipole_interface/%(version_major_minor)s.x/']
 software_license = 'LicenseGPLv3'
 
 toolchain = {'name': 'foss', 'version': '2021b'}
 toolchainopts = {'pic': True, 'usempi': True}
 
-source_urls = ['https://github.com/TRIQS/mini_pole_interface/releases/download/%(version)s/']
-sources = ['mini_pole_interface-%(version)s.tar.gz']
+source_urls = ['https://github.com/TRIQS/minipole_interface/releases/download/%(version)s/']
+sources = ['minipole_interface-%(version)s.tar.gz']
 checksums = ['PUT HERE THE SHA256 OF THE RELEASE TARBALL']
 
 dependencies = [
@@ -40,17 +40,17 @@ separate_build_dir = True
 runtest = 'test'
 
 sanity_check_paths = {
-    'files': ['lib/libmini_pole_interface_c.a'],
-    'dirs': ['include/mini_pole_interface', 'lib', 'share',
-             'lib/python%(pyshortver)s/site-packages/mini_pole_interface'],
+    'files': ['lib/libminipole_interface_c.a'],
+    'dirs': ['include/minipole_interface', 'lib', 'share',
+             'lib/python%(pyshortver)s/site-packages/minipole_interface'],
 }
 
-sanity_check_commands = ["python -c 'import mini_pole_interface'"]
+sanity_check_commands = ["python -c 'import minipole_interface'"]
 
 modextrapaths = {
     'CPLUS_INCLUDE_PATH': 'include',
     'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages',
-    'CMAKE_PREFIX_PATH': 'lib/cmake/mini_pole_interface',
+    'CMAKE_PREFIX_PATH': 'lib/cmake/minipole_interface',
 }
 modextravars = {
     'MINI_POLE_INTERFACE_ROOT': '%(installdir)s',

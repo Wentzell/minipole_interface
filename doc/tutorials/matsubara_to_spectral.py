@@ -29,7 +29,7 @@ import numpy as np
 
 from triqs.gfs import Gf, MeshImFreq, MeshReFreq
 
-from mini_pole_interface import minipole_matsubara
+from minipole_interface import minipole_matsubara
 
 # %% [markdown]
 # ## Set up the reference Green's function

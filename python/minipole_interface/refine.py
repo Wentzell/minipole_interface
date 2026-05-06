@@ -1,6 +1,6 @@
 ################################################################################
 #
-# mini_pole_interface: TRIQS interface to the MiniPole analytic continuation package
+# minipole_interface: TRIQS interface to the MiniPole analytic continuation package
 #
 # Copyright (C) 2026, The Simons Foundation
 #   author: N. Wentzell
@@ -17,7 +17,7 @@
 Wraps :class:`mini_pole.MiniPoleRfDPR`. The single public function
 :func:`minipole_refine` takes an existing pole representation (e.g. from
 AAA, ``adapol``, or a previous ``minipole_*`` call), and returns a refined /
-compressed one. Input may be a :class:`~mini_pole_interface.PoleResult`
+compressed one. Input may be a :class:`~minipole_interface.PoleResult`
 directly or the underlying arrays ``(A_l, x_l)``.
 """
 

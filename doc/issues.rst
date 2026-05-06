@@ -9,7 +9,7 @@ file your issue in the right tracker:
 * **Bugs in the wrapper layer** (Gf ↔ ndarray conversion, ``PoleResult``
   helpers, ``BlockGf`` dispatch, build/install on top of TRIQS, missing
   CMake glue, documentation): file at
-  `<https://github.com/TRIQS/mini_pole_interface/issues>`_.
+  `<https://github.com/TRIQS/minipole_interface/issues>`_.
 
 * **Bugs in the MPM algorithm itself** (incorrect pole locations, ESPRIT /
   conformal-map behavior, knee detection, upstream API changes, regressions
@@ -26,7 +26,7 @@ When in doubt, open it here and we will redirect.
 
 In all cases please include:
 
-#. The version of ``mini_pole_interface``, ``mini_pole``, and TRIQS you are
+#. The version of ``minipole_interface``, ``mini_pole``, and TRIQS you are
    using (``triqs --version``, ``pip show mini_pole``, the git SHA of this
    repository).
 #. For build problems: your operating system and compiler, the output of

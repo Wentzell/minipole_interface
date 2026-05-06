@@ -1,4 +1,4 @@
-def projectName = "mini_pole_interface" /* set to app/repo name */
+def projectName = "minipole_interface" /* set to app/repo name */
 
 def dockerName = projectName.toLowerCase();
 /* depend on triqs upstream branch/project */

@@ -29,7 +29,7 @@ import numpy as np
 
 from triqs.gfs import Gf, MeshDLRImFreq, MeshReFreq
 
-from mini_pole_interface import minipole_dlr
+from minipole_interface import minipole_dlr
 
 # %% [markdown]
 # ## Bethe lattice on a DLR Matsubara mesh
@@ -71,7 +71,7 @@ print(f"DLR mesh size: {len(list(mesh_dlr))}")
 # units. cppdlr stores the same representation, but its `MeshDLR` exposes the
 # pole locations in *dimensionless* units (multiplied by $\beta$). The wrapper
 # divides them out before handing them to upstream — that is the entire bridge
-# (see ``mini_pole_interface._convert._dlr_to_pole_repr``). No analytic
+# (see ``minipole_interface._convert._dlr_to_pole_repr``). No analytic
 # continuation, no integration: both sides describe the same sum-of-poles.
 
 # %% [markdown]

@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 from triqs.gfs import BlockGf, Gf, MeshImFreq
 
-from mini_pole_interface import PoleResult, minipole_matsubara
+from minipole_interface import PoleResult, minipole_matsubara
 
 
 class TestBlockGfDispatch(unittest.TestCase):

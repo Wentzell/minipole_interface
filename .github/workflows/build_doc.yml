@@ -95,7 +95,7 @@ jobs:
         cmake -S triqs -B triqs/build -G Ninja -DBuild_Tests=OFF -DUpdate_Python_Bindings=OFF -DCMAKE_INSTALL_PREFIX=$HOME/install
         cmake --build triqs/build --target install --verbose
 
-    - name: Build mini_pole_interface documentation
+    - name: Build minipole_interface documentation
       run: |
         source $HOME/install/share/triqs/triqsvars.sh
         cmake -S . -B build -G Ninja -DBuild_Documentation=ON

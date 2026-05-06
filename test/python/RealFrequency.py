@@ -6,7 +6,7 @@ import unittest
 
 import numpy as np
 
-from mini_pole_interface import minipole_rf
+from minipole_interface import minipole_rf
 
 
 class TestRealFrequencyTwoPoles(unittest.TestCase):

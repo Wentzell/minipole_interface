@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 from triqs.gfs import Gf, MeshDLRImFreq
 
-from mini_pole_interface import minipole_dlr
+from minipole_interface import minipole_dlr
 
 
 class TestDlrSinglePole(unittest.TestCase):

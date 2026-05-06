@@ -1,11 +1,11 @@
 {% set version = "@PROJECT_VERSION@" %}
 
 package:
-  name: mini_pole_interface
+  name: minipole_interface
   version: {{ version }}
 
 source:
-  url: https://github.com/TRIQS/mini_pole_interface/releases/download/{{ version }}/mini_pole_interface-{{ version }}.tar.gz
+  url: https://github.com/TRIQS/minipole_interface/releases/download/{{ version }}/minipole_interface-{{ version }}.tar.gz
   sha256: PUT HERE THE SHA256 OF YOUR RELEASE TARBALL
 
 build:
@@ -42,10 +42,10 @@ test:
     - export OMPI_MCA_rmaps_base_oversubscribe=yes
     - export OMPI_MCA_btl_vader_single_copy_mechanism=none
     - export mpiexec="mpiexec --allow-run-as-root"
-    - python -c "import mini_pole_interface"
+    - python -c "import minipole_interface"
 
 about:
-  home: https://triqs.github.io/mini_pole_interface
+  home: https://triqs.github.io/minipole_interface
   license: GPL-3.0-or-later
   license_family: GPL
   license_file: LICENSE.txt

@@ -1,6 +1,6 @@
 # See ../triqs/packaging for other options
 FROM flatironinstitute/triqs:unstable-ubuntu-clang
-ARG APPNAME=mini_pole_interface
+ARG APPNAME=minipole_interface
 
 # Install MiniPole + kneed (kneed is imported at module load by mini_pole but missing from upstream's install_requires)
 RUN pip install --no-cache-dir mini_pole==0.7 kneed
