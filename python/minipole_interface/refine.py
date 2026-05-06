@@ -15,7 +15,7 @@
 """Pole-representation refinement entry point.
 
 Wraps :class:`mini_pole.MiniPoleRfDPR`. The single public function
-:func:`minipole_refine` takes an existing pole representation (e.g. from
+:func:`refine_poles` takes an existing pole representation (e.g. from
 AAA, ``adapol``, or a previous ``minipole_*`` call), and returns a refined /
 compressed one. Input may be a :class:`~minipole_interface.PoleResult`
 directly or the underlying arrays ``(A_l, x_l)``.
@@ -30,7 +30,7 @@ from mini_pole import MiniPoleRfDPR
 from ._convert import PoleResult, _make_pole_result
 
 
-def minipole_refine(
+def refine_poles(
     pole_or_Al: Union[PoleResult, np.ndarray],
     xl: Optional[np.ndarray] = None,
     *,

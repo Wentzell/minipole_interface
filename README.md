@@ -63,13 +63,13 @@ This is a python-only TRIQS app. Two steps:
 
 ```python
 from triqs.gfs import Gf, MeshImFreq, MeshReFreq
-from minipole_interface import minipole_matsubara
+from minipole_interface import fit_poles_matsubara
 
 g = Gf(mesh=MeshImFreq(beta=10.0, statistic='Fermion', n_iw=200), target_shape=(1, 1))
 for iw in g.mesh:
     g[iw] = 1.0 / (complex(iw) - 0.3)        # single pole at omega = 0.3
 
-res = minipole_matsubara(g, M=1)
+res = fit_poles_matsubara(g, M=1)
 print(res.pole_location, res.pole_weight[0, 0, 0])
 
 g_re = res.to_gf_refreq(MeshReFreq(-2.0, 2.0, 401), eta=1e-3)
@@ -82,10 +82,10 @@ the tutorial notebooks in the documentation.
 
 | Function | Input | Wraps | Use when … |
 | --- | --- | --- | --- |
-| `minipole_matsubara` | `Gf` / `BlockGf` on `MeshImFreq` | `mini_pole.MiniPole` | you have dense Matsubara samples |
-| `minipole_dlr` | `Gf` / `BlockGf` on `MeshDLR*` | `mini_pole.MiniPoleDLR` | you have a compact DLR representation |
-| `minipole_rf` | callable(s) `G_ij(z)` analytic in upper half-plane | `mini_pole.MiniPoleRf` | you have an analytic real-frequency expression |
-| `minipole_refine` | existing `(A_l, x_l)` or a `PoleResult` | `mini_pole.MiniPoleRfDPR` | you want to refine / compress an existing pole set |
+| `fit_poles_matsubara` | `Gf` / `BlockGf` on `MeshImFreq` | `mini_pole.MiniPole` | you have dense Matsubara samples |
+| `fit_poles_dlr` | `Gf` / `BlockGf` on `MeshDLR*` | `mini_pole.MiniPoleDLR` | you have a compact DLR representation |
+| `fit_poles_rf` | callable(s) `G_ij(z)` analytic in upper half-plane | `mini_pole.MiniPoleRf` | you have an analytic real-frequency expression |
+| `refine_poles` | existing `(A_l, x_l)` or a `PoleResult` | `mini_pole.MiniPoleRfDPR` | you want to refine / compress an existing pole set |
 
 ## Documentation
 

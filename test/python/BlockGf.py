@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 from triqs.gfs import BlockGf, Gf, MeshImFreq
 
-from minipole_interface import PoleResult, minipole_matsubara
+from minipole_interface import PoleResult, fit_poles_matsubara
 
 
 class TestBlockGfDispatch(unittest.TestCase):
@@ -23,7 +23,7 @@ class TestBlockGfDispatch(unittest.TestCase):
         g_up.data[:, 0, 0] = 1.0 / (iw - self.x_up)
         g_dn.data[:, 0, 0] = 1.0 / (iw - self.x_dn)
         self.bg = BlockGf(name_list=["up", "dn"], block_list=[g_up, g_dn])
-        self.out = minipole_matsubara(self.bg, M=1)
+        self.out = fit_poles_matsubara(self.bg, M=1)
 
     def test_returns_dict_keyed_by_block(self):
         self.assertIsInstance(self.out, dict)

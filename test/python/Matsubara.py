@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 from triqs.gfs import Gf, MeshImFreq, MeshReFreq
 
-from minipole_interface import minipole_matsubara
+from minipole_interface import fit_poles_matsubara
 
 
 class TestMatsubaraSinglePole(unittest.TestCase):
@@ -20,7 +20,7 @@ class TestMatsubaraSinglePole(unittest.TestCase):
         self.g = Gf(mesh=mesh, target_shape=(1, 1))
         iw = np.asarray(mesh.values(), dtype=complex)
         self.g.data[:, 0, 0] = 1.0 / (iw - self.x0)
-        self.res = minipole_matsubara(self.g, M=1)
+        self.res = fit_poles_matsubara(self.g, M=1)
 
     def test_pole_recovery(self):
         self.assertEqual(self.res.pole_location.shape, (1,))

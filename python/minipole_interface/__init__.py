@@ -16,13 +16,13 @@ r"""TRIQS interface to the MiniPole analytic continuation package.
 
 Public entry points:
 
-* :func:`minipole_matsubara` — wraps :class:`mini_pole.MiniPole` and accepts a
+* :func:`fit_poles_matsubara` — wraps :class:`mini_pole.MiniPole` and accepts a
   TRIQS ``Gf``/``BlockGf`` on ``MeshImFreq``.
-* :func:`minipole_dlr` — wraps :class:`mini_pole.MiniPoleDLR` and accepts a
+* :func:`fit_poles_dlr` — wraps :class:`mini_pole.MiniPoleDLR` and accepts a
   ``Gf``/``BlockGf`` on ``MeshDLR`` / ``MeshDLRImFreq`` / ``MeshDLRImTime``.
-* :func:`minipole_rf` — wraps :class:`mini_pole.MiniPoleRf`; accepts analytic
+* :func:`fit_poles_rf` — wraps :class:`mini_pole.MiniPoleRf`; accepts analytic
   real-frequency expressions as callables.
-* :func:`minipole_refine` — wraps :class:`mini_pole.MiniPoleRfDPR`; refines /
+* :func:`refine_poles` — wraps :class:`mini_pole.MiniPoleRfDPR`; refines /
   compresses an existing pole representation.
 
 All four return a :class:`PoleResult` (or a ``dict[block_name, PoleResult]`` for
@@ -31,15 +31,15 @@ All four return a :class:`PoleResult` (or a ``dict[block_name, PoleResult]`` for
 """
 
 from ._convert import PoleResult
-from .dlr import minipole_dlr
-from .matsubara import minipole_matsubara
-from .real_frequency import minipole_rf
-from .refine import minipole_refine
+from .dlr import fit_poles_dlr
+from .matsubara import fit_poles_matsubara
+from .real_frequency import fit_poles_rf
+from .refine import refine_poles
 
 __all__ = [
     "PoleResult",
-    "minipole_matsubara",
-    "minipole_dlr",
-    "minipole_rf",
-    "minipole_refine",
+    "fit_poles_matsubara",
+    "fit_poles_dlr",
+    "fit_poles_rf",
+    "refine_poles",
 ]

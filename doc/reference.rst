@@ -11,10 +11,10 @@ dataclass returned by all of them.
 .. autosummary::
    :nosignatures:
 
-   minipole_matsubara
-   minipole_dlr
-   minipole_rf
-   minipole_refine
+   fit_poles_matsubara
+   fit_poles_dlr
+   fit_poles_rf
+   refine_poles
    PoleResult
 
 Full module reference

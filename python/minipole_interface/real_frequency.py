@@ -15,7 +15,7 @@
 """Analytic real-frequency entry point.
 
 Wraps :class:`mini_pole.MiniPoleRf`. The single public function
-:func:`minipole_rf` accepts the analytic continuation of a Green's-function
+:func:`fit_poles_rf` accepts the analytic continuation of a Green's-function
 matrix as a callable (scalar), a flat list of ``n_orb**2`` callables in
 row-major order, or a nested ``n_orb x n_orb`` list. Each callable
 ``G_ij(z)`` must be analytic in the upper half-plane. There is no Gf input
@@ -32,7 +32,7 @@ from mini_pole import MiniPoleRf
 from ._convert import PoleResult, _make_pole_result
 
 
-def minipole_rf(
+def fit_poles_rf(
     G_rf: Union[Callable, Sequence[Callable], Sequence[Sequence[Callable]]],
     *,
     func_type: str = "real",
@@ -49,8 +49,8 @@ def minipole_rf(
 ) -> PoleResult:
     """Run MiniPoleRf on analytic real-frequency Green's-function expression(s).
 
-    Wraps :class:`mini_pole.MiniPoleRf`. Unlike :func:`minipole_matsubara` /
-    :func:`minipole_dlr`, this entry point does not accept a TRIQS Gf: TRIQS
+    Wraps :class:`mini_pole.MiniPoleRf`. Unlike :func:`fit_poles_matsubara` /
+    :func:`fit_poles_dlr`, this entry point does not accept a TRIQS Gf: TRIQS
     containers do not carry the analytic continuation of the Green's function,
     so the user must supply the analytic form ``G_ij(z)`` themselves.
 

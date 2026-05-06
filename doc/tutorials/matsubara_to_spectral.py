@@ -17,7 +17,7 @@
 # # Matsubara → spectral function: Bethe lattice
 #
 # Take the Bethe-lattice (semicircular-DOS) Green's function on a fermionic
-# Matsubara mesh, run [`minipole_matsubara`](../reference.html), and reconstruct
+# Matsubara mesh, run [`fit_poles_matsubara`](../reference.html), and reconstruct
 # the real-frequency spectral function $A(\omega) = -\mathrm{Im}\,G(\omega +
 # i\eta) / \pi$. The Bethe lattice has a continuous spectrum, so the Minimal
 # Pole Method finds a discretized pole approximation; we'll see how well that
@@ -29,7 +29,7 @@ import numpy as np
 
 from triqs.gfs import Gf, MeshImFreq, MeshReFreq
 
-from minipole_interface import minipole_matsubara
+from minipole_interface import fit_poles_matsubara
 
 # %% [markdown]
 # ## Set up the reference Green's function
@@ -79,7 +79,7 @@ for iw in mesh_iw:
 # more poles give a better fit, with diminishing returns past ~20.
 
 # %%
-res = minipole_matsubara(g, M=20, compute_const=False)
+res = fit_poles_matsubara(g, M=20, compute_const=False)
 print(f"recovered {len(res.pole_location)} poles")
 print(f"upstream fit error: {res.fit_error}")
 

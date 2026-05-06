@@ -20,7 +20,7 @@
 # [Matsubara tutorial](matsubara_to_spectral.html), but with the input encoded
 # in the [DLR](https://triqs.github.io/triqs/latest/documentation/manual/triqs/gfs/c++/dlr.html)
 # basis instead of a dense Matsubara grid. We will see that
-# [`minipole_dlr`](../reference.html) recovers the same pole representation
+# [`fit_poles_dlr`](../reference.html) recovers the same pole representation
 # from a *much* sparser sampling.
 
 # %%
@@ -29,7 +29,7 @@ import numpy as np
 
 from triqs.gfs import Gf, MeshDLRImFreq, MeshReFreq
 
-from minipole_interface import minipole_dlr
+from minipole_interface import fit_poles_dlr
 
 # %% [markdown]
 # ## Bethe lattice on a DLR Matsubara mesh
@@ -78,7 +78,7 @@ print(f"DLR mesh size: {len(list(mesh_dlr))}")
 # ## Run MPM and reconstruct the spectrum
 
 # %%
-res = minipole_dlr(g, n0=2, M=20)
+res = fit_poles_dlr(g, n0=2, M=20)
 print(f"recovered {len(res.pole_location)} poles")
 print(f"upstream fit error: {res.fit_error}")
 

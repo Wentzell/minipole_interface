@@ -16,7 +16,7 @@
 
 Wraps :class:`mini_pole.MiniPoleDLR` for TRIQS Green's-function containers
 carrying a DLR mesh (``MeshDLR``, ``MeshDLRImFreq``, or ``MeshDLRImTime``).
-The single public function :func:`minipole_dlr` extracts cppdlr's pole
+The single public function :func:`fit_poles_dlr` extracts cppdlr's pole
 representation directly and hands ``(A_l, x_l, beta)`` to upstream — see
 :func:`minipole_interface._convert._dlr_to_pole_repr` for the
 dimensionless-rf-nodes-divided-by-beta basis bridge.
@@ -34,7 +34,7 @@ from ._convert import (
 )
 
 
-def minipole_dlr(
+def fit_poles_dlr(
     g,
     *,
     n0: int,
@@ -72,7 +72,7 @@ def minipole_dlr(
     """
     kw = {k: v for k, v in locals().items() if k != "g"}
     if _is_block_gf(g):
-        return {name: minipole_dlr(blk, **kw) for name, blk in g}
+        return {name: fit_poles_dlr(blk, **kw) for name, blk in g}
 
     Al_dlr, xl_dlr, beta = _dlr_to_pole_repr(g)
     p = MiniPoleDLR(Al_dlr, xl_dlr, beta, **kw)

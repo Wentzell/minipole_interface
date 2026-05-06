@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-"""Real-frequency analytic continuation regression test for minipole_rf."""
+"""Real-frequency analytic continuation regression test for fit_poles_rf."""
 
 import unittest
 
 import numpy as np
 
-from minipole_interface import minipole_rf
+from minipole_interface import fit_poles_rf
 
 
 class TestRealFrequencyTwoPoles(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestRealFrequencyTwoPoles(unittest.TestCase):
         # Two complex poles in the lower half-plane (retarded GF analytic in upper).
         self.poles = np.array([0.3 - 0.05j, -0.7 - 0.05j])
         self.G_rf = lambda z: 1.0 / (z - self.poles[0]) + 1.0 / (z - self.poles[1])
-        self.res = minipole_rf(
+        self.res = fit_poles_rf(
             self.G_rf,
             func_type="complex",
             interval_type="infinite",

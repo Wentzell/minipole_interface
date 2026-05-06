@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 
-"""Refinement regression test for minipole_refine."""
+"""Refinement regression test for refine_poles."""
 
 import unittest
 
 import numpy as np
 
-from minipole_interface import minipole_refine, minipole_rf
+from minipole_interface import refine_poles, fit_poles_rf
 
 
 class TestRefineCompressesRedundancy(unittest.TestCase):
-    """Refining the output of minipole_rf reproduces the same pole set."""
+    """Refining the output of fit_poles_rf reproduces the same pole set."""
 
     def setUp(self):
         self.poles = np.array([0.3 - 0.05j, -0.7 - 0.05j])
@@ -18,7 +18,7 @@ class TestRefineCompressesRedundancy(unittest.TestCase):
         self.want = np.array(sorted(self.poles, key=lambda p: p.real))
 
     def test_refine_from_pole_result(self):
-        first = minipole_rf(
+        first = fit_poles_rf(
             self.G_rf,
             func_type="complex",
             interval_type="infinite",
@@ -26,7 +26,7 @@ class TestRefineCompressesRedundancy(unittest.TestCase):
             err=1e-9,
             M=2,
         )
-        refined = minipole_refine(
+        refined = refine_poles(
             first,
             interval_type="infinite",
             wp_max=1.0,
@@ -39,7 +39,7 @@ class TestRefineCompressesRedundancy(unittest.TestCase):
     def test_refine_from_arrays(self):
         Al = np.ones((2, 1, 1), dtype=complex)
         xl = self.poles.astype(complex)
-        refined = minipole_refine(
+        refined = refine_poles(
             Al,
             xl,
             interval_type="infinite",

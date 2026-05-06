@@ -15,7 +15,7 @@
 """Matsubara-frequency entry point.
 
 Wraps :class:`mini_pole.MiniPole` for TRIQS Green's-function containers. The
-single public function :func:`minipole_matsubara` accepts a ``Gf`` on
+single public function :func:`fit_poles_matsubara` accepts a ``Gf`` on
 ``MeshImFreq`` (matrix- or scalar-valued) or a ``BlockGf`` whose blocks live
 on ``MeshImFreq``, slices the fermionic mesh to its non-negative half (which
 upstream's contour-integral construction requires), and returns a
@@ -35,7 +35,7 @@ from ._convert import (
 )
 
 
-def minipole_matsubara(
+def fit_poles_matsubara(
     g,
     *,
     n0="auto",
@@ -69,7 +69,7 @@ def minipole_matsubara(
     """
     kw = {k: v for k, v in locals().items() if k != "g"}
     if _is_block_gf(g):
-        return {name: minipole_matsubara(blk, **kw) for name, blk in g}
+        return {name: fit_poles_matsubara(blk, **kw) for name, blk in g}
 
     G_w, w = _gf_imfreq_to_arrays(g)
     p = MiniPole(G_w, w, **kw)
